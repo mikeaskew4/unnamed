@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
+    @State private var orientation = UIDeviceOrientation.unknown
+
     @ObservedObject var sharedData = SharedRadiusData()
     @ObservedObject var tabsModel = TabsModel()
     
@@ -33,42 +33,52 @@ struct ContentView: View {
     }
     
     var body: some View {
-        
         Group {
-            if horizontalSizeClass == .compact {
-                // Portrait layout
-                VStack {
-                    CircleView(tabsModel: tabsModel, sharedData: sharedData)
-
-                    if isTabListViewVisible {
-                        VStack {
-                            TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
-                                .padding(.vertical, 0)
-                            CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                .padding(20)
+            if orientation.isLandscape {
+                // Landscape layout
+                HStack {
+                    
+                    VStack {
+                        if isTabListViewVisible {
+                            VStack {
+                                TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
+                                    .padding(.vertical, 0)
+                                CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
+                                    .padding(20)
+                                    .background(.white)
+                            }
                         }
                         
                     }
-
-                }
-            } else {
-                // Landscape layout
-                VStack {
                     CircleView(tabsModel: tabsModel, sharedData: sharedData)
+                }
 
-                    if isTabListViewVisible {
-                        VStack {
-                            TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
-                                .padding(.vertical, 0)
-                            CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                .padding(20)
+            } else {
+                // Portrait layout
+                VStack {
+                    
+                    CircleView(tabsModel: tabsModel, sharedData: sharedData)
+                    VStack {
+                        
+                        if isTabListViewVisible {
+                            VStack {
+                                TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
+                                    .padding(.vertical, 0)
+                                CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
+                                    .padding(20)
+                                    .background(.white)
+                            }
+                            
                         }
+                        
                     }
-
                 }
             }
         }
-        .navigationTitle("Content View")
+        .onRotate { newOrientation in
+            orientation = newOrientation
+        }
+
     }
 
 
@@ -81,6 +91,24 @@ struct ContentView: View {
     }
 }
 
+struct DeviceRotationViewModifier: ViewModifier {
+    let action: (UIDeviceOrientation) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+// A View wrapper to make the modifier easier to use
+extension View {
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
 
 #Preview {
     ContentView()

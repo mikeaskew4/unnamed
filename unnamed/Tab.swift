@@ -72,7 +72,7 @@ struct TabListView: View {
 
                     Button(
                         action: {
-                            let lastTabRadius = tabsModel.tabs.last?.radius ?? 0 
+                            let lastTabRadius = tabsModel.tabs.last?.radius ?? 0
                             let newRadius = lastTabRadius + 20
                             let newRadiusId = UUID()
                             let newTab = Tab(id: newRadiusId, title: "Radius\(tabsModel.tabs.count + 1)", radius: newRadius)
@@ -106,6 +106,7 @@ struct TabListView: View {
         }
         .frame(height: 50)
         .padding(0)
+        .background(.white)
     }
     
     struct DropViewDelegate: DropDelegate {
