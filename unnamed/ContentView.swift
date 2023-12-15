@@ -78,7 +78,6 @@ struct ContentView: View {
         .onRotate { newOrientation in
             orientation = newOrientation
         }
-
     }
 
 

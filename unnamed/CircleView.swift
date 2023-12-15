@@ -13,6 +13,8 @@ struct Tab: Identifiable, Equatable {
     var title: String
     var color: Color
     var radius: CGFloat = 50
+    var stroke: CGFloat = 3
+    var blur: CGFloat = 0
     
     static func ==(lhs: Tab, rhs: Tab) -> Bool {
         lhs.id == rhs.id
@@ -33,18 +35,23 @@ struct Tab: Identifiable, Equatable {
             print(self.title, self.radius)
         }
     }
+    
+    mutating func updateBlur(from sharedData: SharedRadiusData) {
+        if self.id == sharedData.radiusId {
+            self.blur = sharedData.blur
+        }
+    }
+    
+    mutating func updateStroke(from sharedData: SharedRadiusData) {
+        if self.id == sharedData.radiusId {
+            self.stroke = sharedData.stroke
+        }
+    }
 }
 
 struct CircleView: View {
     @ObservedObject var tabsModel: TabsModel
     @ObservedObject var sharedData: SharedRadiusData
-
-//    var updatedTabs: [Tab] {
-//        tabs.map { var tab = $0
-//            tab.updateRadius(from: sharedData)
-//            return tab
-//        }
-//    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -53,7 +60,8 @@ struct CircleView: View {
 
                 ForEach(tabsModel.tabs) { tab in
                     Circle()
-                        .stroke(tab.color, lineWidth: 3)
+                        .stroke(tab.color, lineWidth: tab.stroke)
+                        .blur(radius: tab.blur, opaque: false)
                         .frame(
                             width: tab.radius,
                             height: tab.radius
@@ -62,6 +70,7 @@ struct CircleView: View {
                 }
             }
         }
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
     }
 }
 

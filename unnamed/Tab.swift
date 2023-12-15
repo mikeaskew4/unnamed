@@ -37,6 +37,18 @@ class TabsModel: ObservableObject {
             tabs[index].radius = radius
         }
     }
+    
+    func updateBlur(forTabWithId id: UUID, to blur: CGFloat) {
+        if let index = tabs.firstIndex(where: { $0.id == id }) {
+            tabs[index].blur = blur
+        }
+    }
+    
+    func updateStroke(forTabWithId id: UUID, to stroke: CGFloat) {
+        if let index = tabs.firstIndex(where: { $0.id == id }) {
+            tabs[index].stroke = stroke
+        }
+    }
 }
 
 struct TabListView: View {
@@ -72,14 +84,21 @@ struct TabListView: View {
 
                     Button(
                         action: {
-                            let lastTabRadius = tabsModel.tabs.last?.radius ?? 0
-                            let newRadius = lastTabRadius + 20
+                            let lastTab = tabsModel.tabs.last
+                            let lastTabRadius = lastTab?.radius ?? 0
+                            let lastTabStroke = lastTab?.stroke ?? 0
+                            let lastTabRadiusPlusStroke = lastTabRadius + lastTabStroke
+                            
+                            let newRadius = lastTabRadiusPlusStroke + 20
                             let newRadiusId = UUID()
                             let newTab = Tab(id: newRadiusId, title: "Radius\(tabsModel.tabs.count + 1)", radius: newRadius)
                             tabsModel.tabs.append(newTab)
                             sharedData.radiusId = newRadiusId // Update sharedData.radiusId with the new UUID
                             shouldScrollToEnd = true
                             self.selectedTab = newTab
+                            
+                            // Reset SharedRadiusData to default values
+                            resetSharedRadiusData(to: newRadius)
                         },
                         label: {
                             Text("Add")
@@ -107,6 +126,12 @@ struct TabListView: View {
         .frame(height: 50)
         .padding(0)
         .background(.white)
+    }
+    
+    func resetSharedRadiusData(to newRadius: CGFloat) {
+        sharedData.radius = newRadius
+        sharedData.blur = 0    // Default blur
+        sharedData.stroke = 3  // Default stroke
     }
     
     struct DropViewDelegate: DropDelegate {

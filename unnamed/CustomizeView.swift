@@ -20,6 +20,8 @@ struct CustomizeView: View {
             VStack {
                 if let selectedTab = selectedTab {
                     Spacer()
+                    
+                    // Radius
                     HStack {
                         Text("Radius")
                             .frame(alignment: .leading)
@@ -31,6 +33,20 @@ struct CustomizeView: View {
                             }
                         ), in: 1...500)
                     }
+                    
+                    // Stroke
+                    HStack {
+                        Text("Size")
+                            .frame(alignment: .leading)
+                        Slider(value: Binding(
+                            get: { Double(sharedData.stroke) },
+                            set: { newValue in
+                                sharedData.stroke = CGFloat(newValue)
+                                tabsModel.updateStroke(forTabWithId: selectedTab.id, to: CGFloat(newValue))
+                            }
+                        ), in: 0...20)
+                    }
+                    
                     // Color Picker
                     HStack {
                         Text("Color")
@@ -45,6 +61,20 @@ struct CustomizeView: View {
                             }
                         Spacer()
                     }
+                    
+                    // Blur
+                    HStack {
+                        Text("Blur")
+                            .frame(alignment: .leading)
+                        Slider(value: Binding(
+                            get: { Double(sharedData.blur) },
+                            set: { newValue in
+                                sharedData.blur = CGFloat(newValue)
+                                tabsModel.updateBlur(forTabWithId: selectedTab.id, to: CGFloat(newValue))
+                            }
+                        ), in: 0...10)
+                    }
+                    
                     Spacer()
                     
                     .onAppear {
