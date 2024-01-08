@@ -14,7 +14,8 @@ struct CustomizeView: View {
     @ObservedObject var sharedData: SharedRadiusData
     @State private var tempColor: Color = Color.clear // Temporary state for color
 
-
+    @State private var currentValue = 0.0
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -23,15 +24,16 @@ struct CustomizeView: View {
                     
                     // Radius
                     HStack {
-                        Text("Radius")
-                            .frame(alignment: .leading)
-                        Slider(value: Binding(
-                            get: { Double(sharedData.radius) },
-                            set: { newValue in
-                                sharedData.radius = CGFloat(newValue)
-                                tabsModel.updateRadius(forTabWithId: selectedTab.id, to: CGFloat(newValue))
-                            }
-                        ), in: 1...200)
+//                        Text("Radius")
+//                            .frame(alignment: .leading)
+                        RadiusSliderView(
+                            sharedData: sharedData,
+                            tabsModel: tabsModel,
+                            selectedTab: selectedTab,
+                            value: $currentValue,
+                            sliderRange: 1...250
+                        )
+                        .frame(height: 50)
                     }
                     
                     // Stroke

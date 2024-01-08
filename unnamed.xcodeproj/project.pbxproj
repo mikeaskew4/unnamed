@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B75790292B2A2C8F00333D07 /* SharedRadiusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */; };
+		B79470C12B4C630400E62026 /* RadiusSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79470C02B4C630400E62026 /* RadiusSliderView.swift */; };
 		B7B286072B290D98006FAB01 /* unnamedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286062B290D98006FAB01 /* unnamedApp.swift */; };
 		B7B286092B290D98006FAB01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286082B290D98006FAB01 /* ContentView.swift */; };
 		B7B2860B2B290D9B006FAB01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7B2860A2B290D9B006FAB01 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedRadiusData.swift; sourceTree = "<group>"; };
+		B79470C02B4C630400E62026 /* RadiusSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSliderView.swift; sourceTree = "<group>"; };
 		B7B286032B290D98006FAB01 /* unnamed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unnamed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B286062B290D98006FAB01 /* unnamedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unnamedApp.swift; sourceTree = "<group>"; };
 		B7B286082B290D98006FAB01 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				B7B286162B290F05006FAB01 /* CircleView.swift */,
 				B7B286182B29130E006FAB01 /* CustomizeView.swift */,
 				B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */,
+				B79470C02B4C630400E62026 /* RadiusSliderView.swift */,
 			);
 			path = unnamed;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				B7B286172B290F05006FAB01 /* CircleView.swift in Sources */,
 				B7B286152B290EF4006FAB01 /* Tab.swift in Sources */,
+				B79470C12B4C630400E62026 /* RadiusSliderView.swift in Sources */,
 				B75790292B2A2C8F00333D07 /* SharedRadiusData.swift in Sources */,
 				B7B286192B29130E006FAB01 /* CustomizeView.swift in Sources */,
 				B7B286092B290D98006FAB01 /* ContentView.swift in Sources */,
