@@ -24,17 +24,14 @@ struct CustomizeView: View {
                     
                     // Radius
                     HStack {
-//                        Text("Radius")
-//                            .frame(alignment: .leading)
-                        RadiusSliderView(
+                        RadiusSliderViewControllerRepresentable(
                             sharedData: sharedData,
                             tabsModel: tabsModel,
-                            selectedTab: selectedTab,
-                            value: $currentValue,
-                            sliderRange: 1...250
+                            selectedTab: selectedTab
                         )
                         .frame(height: 50)
                     }
+                    
                     
                     // Stroke
                     HStack {

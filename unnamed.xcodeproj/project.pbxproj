@@ -16,6 +16,8 @@
 		B7B286152B290EF4006FAB01 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286142B290EF4006FAB01 /* Tab.swift */; };
 		B7B286172B290F05006FAB01 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286162B290F05006FAB01 /* CircleView.swift */; };
 		B7B286192B29130E006FAB01 /* CustomizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286182B29130E006FAB01 /* CustomizeView.swift */; };
+		B7F08C7C2B4C743A00644D3E /* RadiusUISliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F08C7B2B4C743A00644D3E /* RadiusUISliderView.swift */; };
+		B7F08C7E2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F08C7D2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		B7B286142B290EF4006FAB01 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		B7B286162B290F05006FAB01 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		B7B286182B29130E006FAB01 /* CustomizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeView.swift; sourceTree = "<group>"; };
+		B7F08C7B2B4C743A00644D3E /* RadiusUISliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusUISliderView.swift; sourceTree = "<group>"; };
+		B7F08C7D2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RadiusUISliderView+UIViewControllerRepresentable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				B7B286182B29130E006FAB01 /* CustomizeView.swift */,
 				B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */,
 				B79470C02B4C630400E62026 /* RadiusSliderView.swift */,
+				B7F08C7B2B4C743A00644D3E /* RadiusUISliderView.swift */,
+				B7F08C7D2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift */,
 			);
 			path = unnamed;
 			sourceTree = "<group>";
@@ -157,8 +163,10 @@
 				B79470C12B4C630400E62026 /* RadiusSliderView.swift in Sources */,
 				B75790292B2A2C8F00333D07 /* SharedRadiusData.swift in Sources */,
 				B7B286192B29130E006FAB01 /* CustomizeView.swift in Sources */,
+				B7F08C7E2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift in Sources */,
 				B7B286092B290D98006FAB01 /* ContentView.swift in Sources */,
 				B7B286072B290D98006FAB01 /* unnamedApp.swift in Sources */,
+				B7F08C7C2B4C743A00644D3E /* RadiusUISliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
