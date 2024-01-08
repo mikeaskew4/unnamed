@@ -18,6 +18,7 @@
 		B7B286192B29130E006FAB01 /* CustomizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286182B29130E006FAB01 /* CustomizeView.swift */; };
 		B7F08C7C2B4C743A00644D3E /* RadiusUISliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F08C7B2B4C743A00644D3E /* RadiusUISliderView.swift */; };
 		B7F08C7E2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F08C7D2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift */; };
+		B7F08C802B4C869E00644D3E /* StyledGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F08C7F2B4C869E00644D3E /* StyledGauge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		B7B286182B29130E006FAB01 /* CustomizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeView.swift; sourceTree = "<group>"; };
 		B7F08C7B2B4C743A00644D3E /* RadiusUISliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusUISliderView.swift; sourceTree = "<group>"; };
 		B7F08C7D2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RadiusUISliderView+UIViewControllerRepresentable.swift"; sourceTree = "<group>"; };
+		B7F08C7F2B4C869E00644D3E /* StyledGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledGauge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				B79470C02B4C630400E62026 /* RadiusSliderView.swift */,
 				B7F08C7B2B4C743A00644D3E /* RadiusUISliderView.swift */,
 				B7F08C7D2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift */,
+				B7F08C7F2B4C869E00644D3E /* StyledGauge.swift */,
 			);
 			path = unnamed;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				B7F08C7E2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift in Sources */,
 				B7B286092B290D98006FAB01 /* ContentView.swift in Sources */,
 				B7B286072B290D98006FAB01 /* unnamedApp.swift in Sources */,
+				B7F08C802B4C869E00644D3E /* StyledGauge.swift in Sources */,
 				B7F08C7C2B4C743A00644D3E /* RadiusUISliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -37,13 +37,13 @@ struct CustomizeView: View {
                     HStack {
                         Text("Size")
                             .frame(alignment: .leading)
-                        Slider(value: Binding(
-                            get: { Double(sharedData.stroke) },
-                            set: { newValue in
-                                sharedData.stroke = CGFloat(newValue)
-                                tabsModel.updateStroke(forTabWithId: selectedTab.id, to: CGFloat(newValue))
-                            }
-                        ), in: 0...20)
+                        StyledGauge(
+                            sharedData: sharedData,
+                            tabsModel: tabsModel,
+                            selectedTab: selectedTab,
+                            range: 0...20,
+                            type: .stroke
+                        )
                     }
                     
                     // Color Picker
@@ -65,26 +65,26 @@ struct CustomizeView: View {
                     HStack {
                         Text("Blur")
                             .frame(alignment: .leading)
-                        Slider(value: Binding(
-                            get: { Double(sharedData.blur) },
-                            set: { newValue in
-                                sharedData.blur = CGFloat(newValue)
-                                tabsModel.updateBlur(forTabWithId: selectedTab.id, to: CGFloat(newValue))
-                            }
-                        ), in: 0...10)
+                        StyledGauge(
+                            sharedData: sharedData,
+                            tabsModel: tabsModel,
+                            selectedTab: selectedTab,
+                            range: 0...10,
+                            type: .blur
+                        )
                     }
                     
                     // Divisions
                     HStack {
                         Text("Divisions")
                             .frame(alignment: .leading)
-                        Slider(value: Binding(
-                            get: { Double(sharedData.divisions) },
-                            set: { newValue in
-                                sharedData.divisions = Int(newValue)
-                                tabsModel.updateDivisions(forTabWithId: selectedTab.id, to: Int(newValue))
-                            }
-                        ), in: 0...20)
+                        StyledGauge(
+                            sharedData: sharedData,
+                            tabsModel: tabsModel,
+                            selectedTab: selectedTab,
+                            range: 0...20,
+                            type: .divisions
+                        )
                     }
                     
                     Spacer()
