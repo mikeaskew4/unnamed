@@ -29,6 +29,17 @@ struct StyledGauge: View {
                 Text(Int(gaugeValue.rounded()).description)
             }
             .gaugeStyle(.accessoryCircularCapacity)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        let dragAmount = value.translation.height
+                        let sensitivityFactor: CGFloat = 50.0
+                        let change = -dragAmount / sensitivityFactor
+                        let newValue = min(max(gaugeValue + change, range.lowerBound), range.upperBound)
+
+                        updateSharedData(with: newValue)
+                    }
+            )
         }
 //        else
         Slider(value: Binding(
