@@ -41,16 +41,27 @@ struct ContentView: View {
                     VStack {
                         if isTabListViewVisible {
                             VStack {
-                                TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
+                                ScrollView {
+                                    TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
                                     .padding(.vertical, 0)
-                                CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                    .padding(20)
-                                    .background(.white)
+                                
+                                    CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
+                                        .padding(20)
+                                        .background(.black)
+                                }
+                                Button("Reset") {
+                                    resetAll()
+                                }
                             }
                         }
                         
                     }
+                    .background(.black)
+                    .zIndex(2)
                     CircleView(tabsModel: tabsModel, sharedData: sharedData)
+                        .clipped() // Prevent content from spilling out
+
+                        .zIndex(0)
                 }
 
             } else {
@@ -58,21 +69,30 @@ struct ContentView: View {
                 VStack {
                     
                     CircleView(tabsModel: tabsModel, sharedData: sharedData)
+                        .zIndex(0)
+                        .clipped() // Prevent content from spilling out
+
                     VStack {
                         
                         if isTabListViewVisible {
                             VStack {
-                                TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
+                                ScrollView {
+                                    TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
                                     .padding(.vertical, 0)
-                                CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                    .padding(20)
-                                    .background(.white)
+                                
+                                    CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
+                                        .padding(20)
+                                        .background(.black)
+                                }
+                                Button("Reset") {
+                                    resetAll()
+                                }
                             }
-                            
                         }
-                        
                     }
                 }
+                .background(.black)
+                .zIndex(2)
             }
         }
         .onRotate { newOrientation in
@@ -87,6 +107,21 @@ struct ContentView: View {
 
     func deleteTab(at offsets: IndexSet) {
         tabsModel.deleteTab(at: offsets)
+    }
+    
+    func resetAll() {
+        // Reset models
+        sharedData.reset()
+        tabsModel.reset()
+
+        // Reset local state
+        selectedTab = nil
+        isTabListViewVisible = true
+
+        // Add initial tab again if needed
+        let initialTab = Tab(id: UUID(), title: "Radius1", radius: 50)
+        tabsModel.tabs.append(initialTab)
+        selectedTab = initialTab
     }
 }
 

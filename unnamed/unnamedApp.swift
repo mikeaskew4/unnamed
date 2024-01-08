@@ -12,6 +12,8 @@ struct unnamedApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.dark) // Enforce dark mode
+
         }
     }
 }

@@ -15,13 +15,13 @@ class TabsModel: ObservableObject {
         guard let fromIndex = tabs.firstIndex(where: { $0.id == draggingID }),
               let toIndex = tabs.firstIndex(where: { $0.id == targetID }),
               fromIndex != toIndex else { return }
-
+        
         withAnimation {
             let toFinalIndex = toIndex > fromIndex ? toIndex + 1 : toIndex
             tabs.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: toFinalIndex)
         }
     }
-
+    
     func moveTab(from source: IndexSet, to destination: Int) {
         withAnimation {
             tabs.move(fromOffsets: source, toOffset: destination)
@@ -49,6 +49,16 @@ class TabsModel: ObservableObject {
             tabs[index].stroke = stroke
         }
     }
+    
+    func updateDivisions(forTabWithId id: UUID, to divisions: Int) {
+        if let index = tabs.firstIndex(where: { $0.id == id }) {
+            tabs[index].divisions = divisions
+        }
+    }
+    
+    func reset() {
+        tabs = [] // or to initial tabs if needed
+    }
 }
 
 struct TabListView: View {
@@ -65,8 +75,8 @@ struct TabListView: View {
                     ForEach(tabsModel.tabs) { tab in
                         Text(tab.title)
                             .padding()
-                            .foregroundColor(tab.id == selectedTab?.id ? Color.black : Color.white) // Black text for selected, white for others
-                            .background(tab.id == selectedTab?.id ? Color.white : Color.gray) // White background for selected, gray for others
+                            .foregroundColor(tab.id == selectedTab?.id ? Color.white : Color.white) // Black text for selected, white for others
+                            .background(tab.id == selectedTab?.id ? Color.white.opacity(0.4) : Color.white.opacity(0.2)) // White background for selected, gray for others
                             .cornerRadius(0)
                             .shadow(color: tab.id == selectedTab?.id ? Color.black.opacity(0.5) : Color.clear, radius: 3, x: 0, y: tab.id == selectedTab?.id ? -2 : 0) // Drop shadow only above for selected tab
                             .onDrag {
@@ -79,6 +89,9 @@ struct TabListView: View {
                                 self.selectedTab = tab
                                 sharedData.radiusId = tab.id
                                 sharedData.radius = tab.radius
+                                sharedData.stroke = tab.stroke
+                                sharedData.blur = tab.blur
+                                sharedData.divisions = tab.divisions
                             }
                     }
 
@@ -111,7 +124,7 @@ struct TabListView: View {
                 }
             }
             
-            .background(Color.gray)
+            .background(Color.black)
             .padding(0)
             
             .onChange(of: shouldScrollToEnd) { _ in
@@ -125,13 +138,15 @@ struct TabListView: View {
         }
         .frame(height: 50)
         .padding(0)
-        .background(.white)
+        .background(.black)
+//        .zIndex(3)
     }
     
     func resetSharedRadiusData(to newRadius: CGFloat) {
         sharedData.radius = newRadius
         sharedData.blur = 0    // Default blur
         sharedData.stroke = 3  // Default stroke
+        sharedData.divisions = 0
     }
     
     struct DropViewDelegate: DropDelegate {

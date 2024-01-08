@@ -31,7 +31,7 @@ struct CustomizeView: View {
                                 sharedData.radius = CGFloat(newValue)
                                 tabsModel.updateRadius(forTabWithId: selectedTab.id, to: CGFloat(newValue))
                             }
-                        ), in: 1...500)
+                        ), in: 1...200)
                     }
                     
                     // Stroke
@@ -73,6 +73,19 @@ struct CustomizeView: View {
                                 tabsModel.updateBlur(forTabWithId: selectedTab.id, to: CGFloat(newValue))
                             }
                         ), in: 0...10)
+                    }
+                    
+                    // Divisions
+                    HStack {
+                        Text("Divisions")
+                            .frame(alignment: .leading)
+                        Slider(value: Binding(
+                            get: { Double(sharedData.divisions) },
+                            set: { newValue in
+                                sharedData.divisions = Int(newValue)
+                                tabsModel.updateDivisions(forTabWithId: selectedTab.id, to: Int(newValue))
+                            }
+                        ), in: 0...20)
                     }
                     
                     Spacer()

@@ -15,6 +15,7 @@ struct Tab: Identifiable, Equatable {
     var radius: CGFloat = 50
     var stroke: CGFloat = 3
     var blur: CGFloat = 0
+    var divisions: Int = 0
     
     static func ==(lhs: Tab, rhs: Tab) -> Bool {
         lhs.id == rhs.id
@@ -47,6 +48,12 @@ struct Tab: Identifiable, Equatable {
             self.stroke = sharedData.stroke
         }
     }
+    
+    mutating func updateDivisions(from sharedData: SharedRadiusData) {
+        if self.id == sharedData.radiusId {
+            self.divisions = sharedData.divisions
+        }
+    }
 }
 
 struct CircleView: View {
@@ -59,18 +66,51 @@ struct CircleView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
 
                 ForEach(tabsModel.tabs) { tab in
-                    Circle()
-                        .stroke(tab.color, lineWidth: tab.stroke)
-                        .blur(radius: tab.blur, opaque: false)
-                        .frame(
-                            width: tab.radius,
-                            height: tab.radius
-                        )
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                    if tab.divisions == 0 {
+                        // Draw a full circle
+                        Circle()
+                            .stroke(tab.color, lineWidth: tab.stroke)
+                            .blur(radius: tab.blur)
+                            .frame(width: tab.radius * 2, height: tab.radius * 2)
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                    } else {
+                        // Draw divided circle
+                        ForEach(0..<Int(tab.divisions), id: \.self) { index in
+                            let totalAngle = 360.0
+                            let anglePerDivision = totalAngle / Double(tab.divisions)
+                            let startAngle = anglePerDivision * Double(index) - 90 // Subtract 90 to start from top
+                            let endAngle = startAngle + anglePerDivision
+                            let gap = 2.0 // Gap between segments in degrees
+
+                            Path { path in
+                                let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                                let radius = tab.radius - tab.stroke / 2 // Adjusting for stroke width
+                                path.addArc(center: center, radius: radius, startAngle: Angle(degrees: startAngle + gap / 2), endAngle: Angle(degrees: endAngle - gap / 2), clockwise: false)
+                            }
+                            .stroke(tab.color, lineWidth: tab.stroke)
+                            .blur(radius: tab.blur)
+                        }
+                    }
                 }
             }
         }
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+    }
+}
+
+struct CircleSegment: Shape {
+    var startAngle: Angle
+    var endAngle: Angle
+    var clockwise: Bool = false
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        let radius = min(rect.width, rect.height) / 2
+
+        path.addArc(center: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+
+        return path
     }
 }
 
