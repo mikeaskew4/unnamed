@@ -89,20 +89,28 @@ struct CustomizeView: View {
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
                                             selectedTab: selectedTab,
-                                            range: 0...32,
+                                            range: 1...32,
                                             type: .divisions,
                                             title: "Steps"
                                         )
                                         
-//                                        StyledGauge(
-//                                            sharedData: sharedData,
-//                                            tabsModel: tabsModel,
-//                                            selectedTab: selectedTab,
-//                                            range: 0...32,
-//                                            type: .none,
-//                                            title: "Gap"
-//                                        )
+                                        StyledGauge(
+                                            sharedData: sharedData,
+                                            tabsModel: tabsModel,
+                                            selectedTab: selectedTab,
+                                            range: 0...32,
+                                            type: .none,
+                                            title: "Gap"
+                                        )
                                         
+                                        StyledGauge(
+                                            sharedData: sharedData,
+                                            tabsModel: tabsModel,
+                                            selectedTab: selectedTab,
+                                            range: 0...32,
+                                            type: .none,
+                                            title: "Rotate"
+                                        )
                                     }
                                     
                                     Spacer()

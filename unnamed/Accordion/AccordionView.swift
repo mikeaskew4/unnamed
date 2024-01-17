@@ -23,7 +23,6 @@ struct AccordionView: View {
         VStack {
             ForEach(items.indices, id: \.self) { index in
                 DisclosureGroup(
-                    items[index].title,
                     isExpanded: Binding(
                         get: { expandedItemIndex == index },
                         set: { isExpanded in
@@ -38,8 +37,20 @@ struct AccordionView: View {
                     if expandedItemIndex == index {
                         contentForItem(index)
                     }
+                } label: {
+//                    HStack {
+                        Text(items[index].title)
+                            .textCase(.uppercase)
+                            .font(.headline) // Customize font here
+                            .foregroundColor(.white) // Customize text color here
+
+//                        Spacer()
+//                        Image(systemName: expandedItemIndex == index ? "chevron.up" : "chevron.down") // Custom caret
+//                            .foregroundColor(.white)
+//                    }
                 }
                 .padding()
+                // Add additional styling to the DisclosureGroup if needed
             }
         }
     }

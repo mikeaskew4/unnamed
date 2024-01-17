@@ -26,6 +26,7 @@ struct StyledGauge: View {
     var body: some View {
         if #available(iOS 16, *) {
             VStack {
+                Text(Int(gaugeValue.rounded()).description)
                 Gauge(value: gaugeValue, in: range) {
                     Text("")
                 } currentValueLabel: {
@@ -39,11 +40,14 @@ struct StyledGauge: View {
                             let sensitivityFactor: CGFloat = 50.0
                             let change = -dragAmount / sensitivityFactor
                             let newValue = min(max(gaugeValue + change, range.lowerBound), range.upperBound)
-                            
-                            updateSharedData(with: newValue)
+                            if type == .divisions {
+                                updateSharedData(with: Int(newValue))
+                            } else {
+                                updateSharedData(with: newValue)
+                            }
                         }
                 )
-                
+                Text(Int(gaugeValue.rounded()).description)
                 Text(title ?? "")
             }
         }
@@ -75,13 +79,20 @@ struct StyledGauge: View {
         case .stroke:
             sharedData.stroke = newValue
             tabsModel.updateStroke(forTabWithId: selectedTab.id, to: newValue)
-        case .divisions:
-            let newDivisions = Int(newValue)
-            sharedData.divisions = newDivisions
-            tabsModel.updateDivisions(forTabWithId: selectedTab.id, to: newDivisions)
         case .blur:
             sharedData.blur = newValue
             tabsModel.updateBlur(forTabWithId: selectedTab.id, to: newValue)
+        default:
+            break
+        }
+    }
+    
+    private func updateSharedData(with newValue: Int) {
+        switch type {
+        case .divisions:
+            // @@TODO handle under 2 divisions
+            sharedData.divisions = newValue
+            tabsModel.updateDivisions(forTabWithId: selectedTab.id, to: newValue)
         default:
             break
         }

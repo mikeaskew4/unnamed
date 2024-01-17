@@ -66,7 +66,7 @@ struct CircleView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
 
                 ForEach(tabsModel.tabs) { tab in
-                    if tab.divisions == 0 {
+                    if tab.divisions < 2 {
                         // Draw a full circle
                         Circle()
                             .stroke(tab.color, lineWidth: tab.stroke)
@@ -84,7 +84,7 @@ struct CircleView: View {
 
                             Path { path in
                                 let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                                let radius = tab.radius - tab.stroke / 2 // Adjusting for stroke width
+                                let radius = tab.radius - tab.stroke / 2 // Adjusting for stroke width @@TODO fix this -- dividing by 4 is closer
                                 path.addArc(center: center, radius: radius, startAngle: Angle(degrees: startAngle + gap / 2), endAngle: Angle(degrees: endAngle - gap / 2), clockwise: false)
                             }
                             .stroke(tab.color, lineWidth: tab.stroke)
