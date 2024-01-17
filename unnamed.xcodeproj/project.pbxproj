@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B75790292B2A2C8F00333D07 /* SharedRadiusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */; };
 		B79470C12B4C630400E62026 /* RadiusSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79470C02B4C630400E62026 /* RadiusSliderView.swift */; };
+		B7AE2C112B586F4600F970A1 /* AccordionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE2C102B586F4600F970A1 /* AccordionView.swift */; };
 		B7B286072B290D98006FAB01 /* unnamedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286062B290D98006FAB01 /* unnamedApp.swift */; };
 		B7B286092B290D98006FAB01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B286082B290D98006FAB01 /* ContentView.swift */; };
 		B7B2860B2B290D9B006FAB01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7B2860A2B290D9B006FAB01 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedRadiusData.swift; sourceTree = "<group>"; };
 		B79470C02B4C630400E62026 /* RadiusSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSliderView.swift; sourceTree = "<group>"; };
+		B7AE2C102B586F4600F970A1 /* AccordionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccordionView.swift; sourceTree = "<group>"; };
 		B7B286032B290D98006FAB01 /* unnamed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unnamed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B286062B290D98006FAB01 /* unnamedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unnamedApp.swift; sourceTree = "<group>"; };
 		B7B286082B290D98006FAB01 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B7AE2C0F2B586F2F00F970A1 /* Accordion */ = {
+			isa = PBXGroup;
+			children = (
+				B7AE2C102B586F4600F970A1 /* AccordionView.swift */,
+			);
+			path = Accordion;
+			sourceTree = "<group>";
+		};
 		B7B285FA2B290D98006FAB01 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +77,7 @@
 		B7B286052B290D98006FAB01 /* unnamed */ = {
 			isa = PBXGroup;
 			children = (
+				B7AE2C0F2B586F2F00F970A1 /* Accordion */,
 				B7B286062B290D98006FAB01 /* unnamedApp.swift */,
 				B7B286082B290D98006FAB01 /* ContentView.swift */,
 				B7B2860A2B290D9B006FAB01 /* Assets.xcassets */,
@@ -169,6 +180,7 @@
 				B7F08C7E2B4C750700644D3E /* RadiusUISliderView+UIViewControllerRepresentable.swift in Sources */,
 				B7B286092B290D98006FAB01 /* ContentView.swift in Sources */,
 				B7B286072B290D98006FAB01 /* unnamedApp.swift in Sources */,
+				B7AE2C112B586F4600F970A1 /* AccordionView.swift in Sources */,
 				B7F08C802B4C869E00644D3E /* StyledGauge.swift in Sources */,
 				B7F08C7C2B4C743A00644D3E /* RadiusUISliderView.swift in Sources */,
 			);
@@ -312,7 +324,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,7 +354,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

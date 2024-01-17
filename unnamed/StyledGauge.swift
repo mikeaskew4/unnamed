@@ -12,6 +12,7 @@ enum GaugeType {
     case stroke
     case divisions
     case blur
+    case none
 }
 
 struct StyledGauge: View {
@@ -20,35 +21,40 @@ struct StyledGauge: View {
     var selectedTab: Tab
     var range: ClosedRange<CGFloat>
     var type: GaugeType
+    var title: String? = ""
     
     var body: some View {
         if #available(iOS 16, *) {
-            Gauge(value: gaugeValue, in: range) {
-                Text("Value")
-            } currentValueLabel: {
-                Text(Int(gaugeValue.rounded()).description)
+            VStack {
+                Gauge(value: gaugeValue, in: range) {
+                    Text("")
+                } currentValueLabel: {
+                    Text(Int(gaugeValue.rounded()).description)
+                }
+                .gaugeStyle(.accessoryCircularCapacity)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            let dragAmount = value.translation.height
+                            let sensitivityFactor: CGFloat = 50.0
+                            let change = -dragAmount / sensitivityFactor
+                            let newValue = min(max(gaugeValue + change, range.lowerBound), range.upperBound)
+                            
+                            updateSharedData(with: newValue)
+                        }
+                )
+                
+                Text(title ?? "")
             }
-            .gaugeStyle(.accessoryCircularCapacity)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        let dragAmount = value.translation.height
-                        let sensitivityFactor: CGFloat = 50.0
-                        let change = -dragAmount / sensitivityFactor
-                        let newValue = min(max(gaugeValue + change, range.lowerBound), range.upperBound)
-
-                        updateSharedData(with: newValue)
-                    }
-            )
         }
-//        else
-        Slider(value: Binding(
-            get: { gaugeValue },
-            set: { newValue in
-                updateSharedData(with: newValue)
-            }
-        ), in: range)
-//        }
+        else {
+            Slider(value: Binding(
+                get: { gaugeValue },
+                set: { newValue in
+                    updateSharedData(with: newValue)
+                }
+            ), in: range)
+        }
     }
     
     private var gaugeValue: CGFloat {
@@ -59,6 +65,8 @@ struct StyledGauge: View {
             return CGFloat(sharedData.divisions)
         case .blur:
             return sharedData.blur
+        default:
+            return 0.0
         }
     }
     
@@ -74,6 +82,12 @@ struct StyledGauge: View {
         case .blur:
             sharedData.blur = newValue
             tabsModel.updateBlur(forTabWithId: selectedTab.id, to: newValue)
+        default:
+            break
         }
     }
+}
+
+#Preview {
+    ContentView()
 }
