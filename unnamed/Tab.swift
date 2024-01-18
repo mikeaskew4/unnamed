@@ -170,11 +170,14 @@ struct TabListView: View {
         var tabsModel: TabsModel
         @Binding var dragging: Tab?
 
-
         func performDrop(info: DropInfo) -> Bool {
+            if dragging != nil && item != dragging {
+                tabsModel.moveTab(draggingID: dragging!.id, to: item.id)
+            }
             dragging = nil
             return true
         }
+
 
         func dropEntered(info: DropInfo) {
             guard let dragging = dragging else { return }
