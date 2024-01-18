@@ -73,7 +73,9 @@ struct CustomizeView: View {
                                             type: .stroke,
                                             title: "Size"
                                         )
-                                        Divider()
+                                        
+                                        
+                                        
                                         // Blur
                                         StyledGauge(
                                             sharedData: sharedData,
@@ -83,7 +85,7 @@ struct CustomizeView: View {
                                             type: .blur,
                                             title: "Blur"
                                         )
-                                        Divider()
+                                        
                                         // Divisions
                                         StyledGauge(
                                             sharedData: sharedData,
@@ -93,7 +95,8 @@ struct CustomizeView: View {
                                             type: .divisions,
                                             title: "Steps"
                                         )
-                                        Divider()
+                                        
+                                        // Gap
                                         StyledGauge(
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
@@ -102,7 +105,8 @@ struct CustomizeView: View {
                                             type: .gap,
                                             title: "Gap"
                                         )
-                                        Divider()
+                                        
+                                        // Rotation
                                         StyledGauge(
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
@@ -113,7 +117,6 @@ struct CustomizeView: View {
                                         )
                                     }
                                     
-                                    Spacer()
                                 }
                                 .padding()
                                 
@@ -152,9 +155,7 @@ struct CustomizeView: View {
     }
     private func openFirstAccordionItem() {
         // Collapse all items except the first one
-        for i in accordionItems.indices {
-            accordionItems[i].isExpanded = (i == expandedItemIndex)
-        }
+        expandedItemIndex = 0
     }
     
     func gridItems(count: Int) -> [GridItem] {
