@@ -35,6 +35,7 @@ struct StyledGauge: View {
                     Text(Int(gaugeValue.rounded()).description)
                 }
                 .gaugeStyle(.accessoryCircularCapacity)
+                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 1.375 : 1.0) // Scale the Gauge
                 .gesture(
                     DragGesture()
                         .onChanged { value in
@@ -73,6 +74,8 @@ struct StyledGauge: View {
             return CGFloat(sharedData.divisions)
         case .gap:
             return CGFloat(sharedData.gap)
+        case .rotation:
+            return CGFloat(sharedData.rotation)
         default:
             return 0.0
         }
@@ -89,6 +92,9 @@ struct StyledGauge: View {
         case .gap:
             sharedData.gap = newValue
             tabsModel.updateGap(forTabWithId: selectedTab.id, to: newValue)
+        case .rotation:
+            sharedData.rotation = newValue
+            tabsModel.updateRotation(forTabWithId: selectedTab.id, to: newValue)
         default:
             break
         }

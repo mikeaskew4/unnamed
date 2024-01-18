@@ -17,7 +17,7 @@ struct Tab: Identifiable, Equatable {
     var blur: CGFloat = 0
     var divisions: Int = 1
     var gap: CGFloat = 2.0
-    var rotation: CGFloat = -90
+    var rotation: CGFloat = 0
     
     static func ==(lhs: Tab, rhs: Tab) -> Bool {
         lhs.id == rhs.id
@@ -56,6 +56,8 @@ struct Tab: Identifiable, Equatable {
             self.divisions = sharedData.divisions
         }
     }
+    
+    // @@TODO ^^ are these necessary?
 }
 
 struct CircleView: View {
@@ -81,7 +83,7 @@ struct CircleView: View {
                         ForEach(0..<Int(tab.divisions), id: \.self) { index in
                             let totalAngle = 360.0
                             let anglePerDivision = totalAngle / Double(tab.divisions)
-                            let startAngle = anglePerDivision * Double(index) - 90 // Subtract 90 to start from top
+                            let startAngle = anglePerDivision * Double(index) - tab.rotation // Subtract 90 to start from top
                             let endAngle = startAngle + anglePerDivision
                             let gap = tab.gap // Gap between segments in degrees
 

@@ -62,6 +62,12 @@ class TabsModel: ObservableObject {
         }
     }
     
+    func updateRotation(forTabWithId id: UUID, to rotation: CGFloat) {
+        if let index = tabs.firstIndex(where: { $0.id == id }) {
+            tabs[index].rotation = rotation
+        }
+    }
+    
     func reset() {
         tabs = [] // or to initial tabs if needed
     }
@@ -156,7 +162,7 @@ struct TabListView: View {
         sharedData.stroke = 3  // Default stroke
         sharedData.gap = 1
         sharedData.divisions = 1
-        sharedData.rotation = -90
+        sharedData.rotation = 0
     }
     
     struct DropViewDelegate: DropDelegate {

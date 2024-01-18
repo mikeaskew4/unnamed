@@ -73,7 +73,7 @@ struct CustomizeView: View {
                                             type: .stroke,
                                             title: "Size"
                                         )
-                                        
+                                        Divider()
                                         // Blur
                                         StyledGauge(
                                             sharedData: sharedData,
@@ -83,7 +83,7 @@ struct CustomizeView: View {
                                             type: .blur,
                                             title: "Blur"
                                         )
-                                        
+                                        Divider()
                                         // Divisions
                                         StyledGauge(
                                             sharedData: sharedData,
@@ -93,22 +93,22 @@ struct CustomizeView: View {
                                             type: .divisions,
                                             title: "Steps"
                                         )
-                                        
+                                        Divider()
                                         StyledGauge(
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
                                             selectedTab: selectedTab,
-                                            range: 1...CGFloat((360 / sharedData.divisions) - 1),
+                                            range: 1...CGFloat((360 / sharedData.divisions) - 1), // subtract 1 so the division doesn't completely disappear
                                             type: .gap,
                                             title: "Gap"
                                         )
-                                        
+                                        Divider()
                                         StyledGauge(
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
                                             selectedTab: selectedTab,
-                                            range: 0...32,
-                                            type: .none,
+                                            range: 0...360,
+                                            type: .rotation,
                                             title: "Rotate"
                                         )
                                     }
