@@ -19,7 +19,6 @@ struct ContentView: View {
     @State private var isTabListViewVisible: Bool = true
 
     init() {
-//        tabsModel.tabs.append(firstTab)
         tabsModel.tabs.append(contentsOf: [Tab(id: UUID(), title: "Radius1", radius: 50)])
         _selectedTab = State(initialValue: tabsModel.tabs.first)
 
@@ -41,14 +40,13 @@ struct ContentView: View {
                     VStack {
                         if isTabListViewVisible {
                             VStack {
-//                                ScrollView {
-                                    TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
-                                    .padding(.vertical, 0)
-                                
-                                    CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                        .padding(20)
-                                        .background(.black)
-//                                }
+                                TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
+                                .padding(.vertical, 0)
+                            
+                                CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
+                                    .padding(20)
+                                    .background(.black)
+
                                 Button("Reset") {
                                     resetAll()
                                 }
@@ -76,14 +74,12 @@ struct ContentView: View {
                         
                         if isTabListViewVisible {
                             VStack {
-//                                ScrollView {
-                                    TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
-                                    .padding(.vertical, 0)
-                                
-                                    CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                        .padding(20)
-                                        .background(.black)
-//                                }
+                                TabListView(tabsModel: tabsModel, selectedTab: $selectedTab, sharedData: sharedData)
+                                .padding(.vertical, 0)
+                            
+                                CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
+                                    .padding(20)
+                                    .background(.black)
                                 Button("Reset") {
                                     resetAll()
                                 }

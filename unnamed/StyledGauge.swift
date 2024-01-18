@@ -10,8 +10,10 @@ import SwiftUI
 
 enum GaugeType {
     case stroke
-    case divisions
     case blur
+    case divisions
+    case gap
+    case rotation
     case none
 }
 
@@ -65,10 +67,12 @@ struct StyledGauge: View {
         switch type {
         case .stroke:
             return sharedData.stroke
-        case .divisions:
-            return CGFloat(sharedData.divisions)
         case .blur:
             return sharedData.blur
+        case .divisions:
+            return CGFloat(sharedData.divisions)
+        case .gap:
+            return CGFloat(sharedData.gap)
         default:
             return 0.0
         }
@@ -82,6 +86,9 @@ struct StyledGauge: View {
         case .blur:
             sharedData.blur = newValue
             tabsModel.updateBlur(forTabWithId: selectedTab.id, to: newValue)
+        case .gap:
+            sharedData.gap = newValue
+            tabsModel.updateGap(forTabWithId: selectedTab.id, to: newValue)
         default:
             break
         }

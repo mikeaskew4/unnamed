@@ -69,7 +69,7 @@ struct CustomizeView: View {
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
                                             selectedTab: selectedTab,
-                                            range: 0...20,
+                                            range: 1...100,
                                             type: .stroke,
                                             title: "Size"
                                         )
@@ -98,8 +98,8 @@ struct CustomizeView: View {
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
                                             selectedTab: selectedTab,
-                                            range: 0...32,
-                                            type: .none,
+                                            range: 1...CGFloat((360 / sharedData.divisions) - 1),
+                                            type: .gap,
                                             title: "Gap"
                                         )
                                         

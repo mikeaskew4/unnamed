@@ -13,9 +13,11 @@ struct Tab: Identifiable, Equatable {
     var title: String
     var color: Color
     var radius: CGFloat = 50
-    var stroke: CGFloat = 3
+    var stroke: CGFloat = 1
     var blur: CGFloat = 0
-    var divisions: Int = 0
+    var divisions: Int = 1
+    var gap: CGFloat = 2.0
+    var rotation: CGFloat = -90
     
     static func ==(lhs: Tab, rhs: Tab) -> Bool {
         lhs.id == rhs.id
@@ -66,10 +68,11 @@ struct CircleView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
 
                 ForEach(tabsModel.tabs) { tab in
+                    let lineWidth = tab.radius * (tab.stroke * 0.02)
                     if tab.divisions < 2 {
                         // Draw a full circle
                         Circle()
-                            .stroke(tab.color, lineWidth: tab.stroke)
+                            .stroke(tab.color, lineWidth: lineWidth)
                             .blur(radius: tab.blur)
                             .frame(width: tab.radius * 2, height: tab.radius * 2)
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
@@ -80,14 +83,14 @@ struct CircleView: View {
                             let anglePerDivision = totalAngle / Double(tab.divisions)
                             let startAngle = anglePerDivision * Double(index) - 90 // Subtract 90 to start from top
                             let endAngle = startAngle + anglePerDivision
-                            let gap = 2.0 // Gap between segments in degrees
+                            let gap = tab.gap // Gap between segments in degrees
 
                             Path { path in
                                 let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                                let radius = tab.radius - tab.stroke / 2 // Adjusting for stroke width @@TODO fix this -- dividing by 4 is closer
+                                let radius = tab.radius // Adjusting for stroke width @@TODO fix this -- dividing by 4 is closer
                                 path.addArc(center: center, radius: radius, startAngle: Angle(degrees: startAngle + gap / 2), endAngle: Angle(degrees: endAngle - gap / 2), clockwise: false)
                             }
-                            .stroke(tab.color, lineWidth: tab.stroke)
+                            .stroke(tab.color, lineWidth: lineWidth)
                             .blur(radius: tab.blur)
                         }
                     }

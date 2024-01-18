@@ -56,6 +56,12 @@ class TabsModel: ObservableObject {
         }
     }
     
+    func updateGap(forTabWithId id: UUID, to gap: CGFloat) {
+        if let index = tabs.firstIndex(where: { $0.id == id }) {
+            tabs[index].gap = gap
+        }
+    }
+    
     func reset() {
         tabs = [] // or to initial tabs if needed
     }
@@ -92,6 +98,8 @@ struct TabListView: View {
                                 sharedData.stroke = tab.stroke
                                 sharedData.blur = tab.blur
                                 sharedData.divisions = tab.divisions
+                                sharedData.gap = tab.gap
+                                sharedData.rotation = tab.rotation
                             }
                     }
 
@@ -146,7 +154,9 @@ struct TabListView: View {
         sharedData.radius = newRadius
         sharedData.blur = 0    // Default blur
         sharedData.stroke = 3  // Default stroke
-        sharedData.divisions = 0
+        sharedData.gap = 1
+        sharedData.divisions = 1
+        sharedData.rotation = -90
     }
     
     struct DropViewDelegate: DropDelegate {
