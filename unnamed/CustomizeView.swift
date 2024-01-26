@@ -23,6 +23,9 @@ struct CustomizeView: View {
     ]
     @State private var expandedItemIndex: Int? = nil
     
+    var gHeight: CGFloat = 100
+    var gWidth: CGFloat = 100
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -55,6 +58,9 @@ struct CustomizeView: View {
                                                         tabsModel.tabs[index].color = newValue
                                                     }
                                                 }
+                                                
+                                                .frame(width: gWidth, height: gHeight)
+                                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 2.25 : 1.375)
                                             
                                             Text("Color")
                                             
@@ -81,7 +87,7 @@ struct CustomizeView: View {
                                             sharedData: sharedData,
                                             tabsModel: tabsModel,
                                             selectedTab: selectedTab,
-                                            range: 0...10,
+                                            range: 0...24,
                                             type: .blur,
                                             title: "Blur"
                                         )

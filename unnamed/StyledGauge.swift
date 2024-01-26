@@ -32,10 +32,9 @@ struct StyledGauge: View {
     var gHeight: CGFloat = 140
     var gWidth: CGFloat = 100
     
-    
     var body: some View {
         if #available(iOS 16, *) {
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 0) {
                 Spacer()
                 Rectangle()
                     .fill(.clear)
@@ -43,29 +42,69 @@ struct StyledGauge: View {
                     .frame(width: gWidth, height: gHeight)
                     .overlay(
                         VStack {
-                            ZStack {
+                            VStack {
                                 Text(Int(gaugeValue.rounded()).description)
                                     .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding(0)
+                                    .font(.system(size: 12))
                             }
-                            .padding(.vertical, 8)
+                            .zIndex(1)
+                            .frame(width: 28, height: 40)
+                            .offset(y: 8) // Adjusted offset for the top frame
+                            .padding(0)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(.white, lineWidth: 1)
+                                    
+                                    .offset(y: 16) // Adjusted offset for the overlay
+                                    .zIndex(0)
+                            }
                             .opacity(topVisible ? 1.0 : 0)
                             
-                            Gauge(value: gaugeValue, in: range) {
-                                Text("")
-                            } currentValueLabel: {
-                                Text(Int(gaugeValue.rounded()).description)
-                                    .opacity(bottomVisible || topVisible ? 0 : 1.0)
+                            ZStack {
+                                Circle()
+                                        .fill(Color.black) // or any color you prefer
+                                        .edgesIgnoringSafeArea(.all) // Optional, if you want the circle to extend to the screen edges
+  
+                                Gauge(value: gaugeValue, in: range) {
+                                    Text("")
+                                } currentValueLabel: {
+                                    Text(Int(gaugeValue.rounded()).description)
+                                        .opacity(bottomVisible || topVisible ? 0 : 1.0)
+                                }
+                                .gaugeStyle(.accessoryCircularCapacity)
+                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 1.375 : 1.0)
+                                .padding(4)
+                                .zIndex(1)
                             }
-                            .gaugeStyle(.accessoryCircularCapacity)
-                            .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 1.375 : 1.0)
+                            .zIndex(2)
+                            .background(Color.black)
 
-                            Text(Int(gaugeValue.rounded()).description)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.vertical, 8)
-                                .opacity(bottomVisible ? 1.0 : 0)
+                            // bottom text frame - complete
+                            VStack {
+                                Text(Int(gaugeValue.rounded()).description)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding(0)
+                                    .font(.system(size: 12))
+                            }
+                            .zIndex(0)
+                            .frame(width: 28, height: 40)
+                            .offset(y: -8)
+                            .padding(0)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(.white, lineWidth: 1)
+                                    .offset(y: -16)
+                                    .zIndex(0)
+                            }
+                            .opacity(bottomVisible ? 1.0 : 0)
                             
                             Text(title ?? "")
-                                .frame(maxWidth: .infinity, alignment: .center)
+                                .frame(maxWidth: .infinity, maxHeight: 8, alignment: .center)
+                                .padding(0)
+                                .offset(y: -12)
+                            
+                            
                         }
                     .gesture(
                         DragGesture()
@@ -93,8 +132,6 @@ struct StyledGauge: View {
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .frame(minHeight: 140)
-
         }
         else {
             Slider(value: Binding(
