@@ -13,18 +13,18 @@ struct ContentView: View {
     @ObservedObject var sharedData = SharedRadiusData()
     @ObservedObject var tabsModel = TabsModel()
     
-    @State private var firstTab = [Tab(id: UUID(), title: "Radius1", radius: 50)]
+    @State private var firstTab = [Tab(id: UUID(), title: "Radius 1", radius: 50)]
     @State private var selectedTab: Tab?
 
     @State private var isTabListViewVisible: Bool = true
 
     init() {
-        tabsModel.tabs.append(contentsOf: [Tab(id: UUID(), title: "Radius1", radius: 50)])
-        _selectedTab = State(initialValue: tabsModel.tabs.first)
-
+        let initialTab = Tab(id: UUID(), title: "Radius 1", radius: 50)
+        tabsModel.tabs.append(initialTab)
+        _selectedTab = State(initialValue: initialTab)
     }
     
-    private var selectedTabBinding: Binding<Tab?> {
+    public var selectedTabBinding: Binding<Tab?> {
         Binding(
             get: { self.selectedTab },
             set: { self.selectedTab = $0 }
@@ -115,7 +115,7 @@ struct ContentView: View {
         isTabListViewVisible = true
 
         // Add initial tab again if needed
-        let initialTab = Tab(id: UUID(), title: "Radius1", radius: 50)
+        let initialTab = Tab(id: UUID(), title: "Radius 1", radius: 50)
         tabsModel.tabs.append(initialTab)
         selectedTab = initialTab
     }
@@ -140,6 +140,8 @@ extension View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

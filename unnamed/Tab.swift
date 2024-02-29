@@ -86,10 +86,13 @@ struct TabListView: View {
                 HStack {
                     ForEach(tabsModel.tabs) { tab in
                         Text(tab.title)
-                            .padding()
+                            .textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
+                            .padding(.bottom, 4)
+                            .padding(.top, 6)
+                            .padding(.horizontal, 12)
                             .foregroundColor(tab.id == selectedTab?.id ? Color.white : Color.white) // Black text for selected, white for others
                             .background(tab.id == selectedTab?.id ? Color.white.opacity(0.4) : Color.white.opacity(0.2)) // White background for selected, gray for others
-                            .cornerRadius(0)
+                            .clipShape(RoundedCorner(radius: 8, corners: [.topLeft, .topRight]))
                             .shadow(color: tab.id == selectedTab?.id ? Color.black.opacity(0.5) : Color.clear, radius: 3, x: 0, y: tab.id == selectedTab?.id ? -2 : 0) // Drop shadow only above for selected tab
                             .onDrag {
                                 self.dragging = tab
@@ -118,7 +121,7 @@ struct TabListView: View {
                             
                             let newRadius = lastTabRadiusPlusStroke + 20
                             let newRadiusId = UUID()
-                            let newTab = Tab(id: newRadiusId, title: "Radius\(tabsModel.tabs.count + 1)", radius: newRadius)
+                            let newTab = Tab(id: newRadiusId, title: "Radius \(tabsModel.tabs.count + 1)", radius: newRadius)
                             tabsModel.tabs.append(newTab)
                             sharedData.radiusId = newRadiusId // Update sharedData.radiusId with the new UUID
                             shouldScrollToEnd = true
@@ -128,7 +131,8 @@ struct TabListView: View {
                             resetSharedRadiusData(to: newRadius)
                         },
                         label: {
-                            Text("Add")
+                            Image(systemName: "plus")
+                                .font(.headline) // Adjust the size
                                 .foregroundColor(.white)
                         }
                     )
@@ -191,4 +195,19 @@ struct TabListView: View {
             return DropProposal(operation: .move)
         }
     }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+
+#Preview {
+    ContentView()
 }

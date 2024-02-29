@@ -124,13 +124,14 @@ struct CustomizeView: View {
                                     }
                                     
                                 }
-                                .padding()
-                                
+                                .padding(0)
+                                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                             )
                         default:
                             return AnyView(Text("Default Content for Index \(index)"))
                         }
                     }, expandedItemIndex: $expandedItemIndex)
+                    .padding(0)
                     
                     .onAppear {
                         self.tempColor = selectedTab.color
@@ -146,7 +147,7 @@ struct CustomizeView: View {
                     Text("No tab selected")
                 }
             }
-            
+            .padding(0)
             .padding(.top, 50)
             .onChange(of: selectedTab) { _ in
                 // Update tempColor when selectedTab changes
@@ -157,6 +158,7 @@ struct CustomizeView: View {
             Spacer()
             .frame(maxWidth: .infinity, maxHeight: geometry.size.height) // Set the maxHeight to the height of the parent view
         }
+        .padding(0)
         
     }
     private func openFirstAccordionItem() {
@@ -185,6 +187,11 @@ struct CustomizeView: View {
 
 }
 
-#Preview {
-    ContentView()
+
+// Add this at the end of your CustomizeView.swift file
+struct CustomizeView_Previews: PreviewProvider {
+
+    static var previews: some View {
+        ContentView()
+    }
 }

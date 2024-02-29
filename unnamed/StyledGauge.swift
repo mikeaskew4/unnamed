@@ -63,8 +63,8 @@ struct StyledGauge: View {
                             
                             ZStack {
                                 Circle()
-                                        .fill(Color.black) // or any color you prefer
-                                        .edgesIgnoringSafeArea(.all) // Optional, if you want the circle to extend to the screen edges
+                                    .fill(Color.black) // or any color you prefer
+                                    .edgesIgnoringSafeArea(.all) // Optional, if you want the circle to extend to the screen edges
   
                                 Gauge(value: gaugeValue, in: range) {
                                     Text("")
@@ -88,7 +88,7 @@ struct StyledGauge: View {
                                     .font(.system(size: 12))
                             }
                             .zIndex(0)
-                            .frame(width: 28, height: 40)
+                            .frame(width: 28, height: 32)
                             .offset(y: -8)
                             .padding(0)
                             .overlay {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B712BEF12B9128E200FCD37B /* EncodeSans-VariableFont_wdth,wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B712BEEF2B91248D00FCD37B /* EncodeSans-VariableFont_wdth,wght.ttf */; };
 		B75790292B2A2C8F00333D07 /* SharedRadiusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */; };
 		B79470C12B4C630400E62026 /* RadiusSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79470C02B4C630400E62026 /* RadiusSliderView.swift */; };
 		B7AE2C112B586F4600F970A1 /* AccordionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE2C102B586F4600F970A1 /* AccordionView.swift */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B712BEEF2B91248D00FCD37B /* EncodeSans-VariableFont_wdth,wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSans-VariableFont_wdth,wght.ttf"; sourceTree = "<group>"; };
+		B712BEF02B9124C100FCD37B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B75790282B2A2C8F00333D07 /* SharedRadiusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedRadiusData.swift; sourceTree = "<group>"; };
 		B79470C02B4C630400E62026 /* RadiusSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSliderView.swift; sourceTree = "<group>"; };
 		B7AE2C102B586F4600F970A1 /* AccordionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccordionView.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		B7B285FA2B290D98006FAB01 = {
 			isa = PBXGroup;
 			children = (
+				B712BEEF2B91248D00FCD37B /* EncodeSans-VariableFont_wdth,wght.ttf */,
 				B7B286052B290D98006FAB01 /* unnamed */,
 				B7B286042B290D98006FAB01 /* Products */,
 			);
@@ -77,6 +81,7 @@
 		B7B286052B290D98006FAB01 /* unnamed */ = {
 			isa = PBXGroup;
 			children = (
+				B712BEF02B9124C100FCD37B /* Info.plist */,
 				B7AE2C0F2B586F2F00F970A1 /* Accordion */,
 				B7B286062B290D98006FAB01 /* unnamedApp.swift */,
 				B7B286082B290D98006FAB01 /* ContentView.swift */,
@@ -162,6 +167,7 @@
 			files = (
 				B7B2860E2B290D9B006FAB01 /* Preview Assets.xcassets in Resources */,
 				B7B2860B2B290D9B006FAB01 /* Assets.xcassets in Resources */,
+				B712BEF12B9128E200FCD37B /* EncodeSans-VariableFont_wdth,wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +325,7 @@
 				DEVELOPMENT_TEAM = 4PMDRZX4G7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = unnamed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -349,6 +356,7 @@
 				DEVELOPMENT_TEAM = 4PMDRZX4G7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = unnamed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

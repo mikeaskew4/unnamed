@@ -36,13 +36,14 @@ struct AccordionView: View {
                 ) {
                     if expandedItemIndex == index {
                         contentForItem(index)
+                            .padding(0)
+                            .frame(maxWidth: .infinity)
                     }
                 } label: {
 //                    HStack {
                         Text(items[index].title)
                             .textCase(.uppercase)
-                            .font(.headline) // Customize font here
-                            .foregroundColor(.white) // Customize text color here
+                            .foregroundColor(.white)
 
 //                        Spacer()
 //                        Image(systemName: expandedItemIndex == index ? "chevron.up" : "chevron.down") // Custom caret
@@ -50,8 +51,37 @@ struct AccordionView: View {
 //                    }
                 }
                 .padding()
-                // Add additional styling to the DisclosureGroup if needed
+                .disclosureGroupStyle(CustomDisclosureGroupStyle(button: Text("ok")))
             }
         }
+        .padding(0)
+        .frame(maxWidth: .infinity)
     }
+}
+
+struct CustomDisclosureGroupStyle<Label: View>: DisclosureGroupStyle {
+    let button: Label
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+            Spacer()
+            Text("△")
+                .fontWeight(.bold)
+                .rotationEffect(.degrees(configuration.isExpanded ? 0 : 180))
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation {
+                configuration.isExpanded.toggle()
+            }
+        }
+        if configuration.isExpanded {
+            configuration.content
+                .disclosureGroupStyle(self)
+        }
+    }
+}
+
+#Preview {
+    ContentView()
 }

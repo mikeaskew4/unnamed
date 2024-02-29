@@ -66,3 +66,8 @@ struct RadiusSliderView: View {
         }
     }
 }
+
+
+#Preview {
+    ContentView()
+}
