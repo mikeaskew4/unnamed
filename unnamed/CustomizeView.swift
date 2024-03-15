@@ -25,6 +25,8 @@ struct CustomizeView: View {
     
     var gHeight: CGFloat = 100
     var gWidth: CGFloat = 72
+
+    @State private var isInteractingWithComponent = false
     
     var body: some View {
         
@@ -42,7 +44,9 @@ struct CustomizeView: View {
             }
             VStack() {
                 if let selectedTab = selectedTab {
-                    AccordionView(items: $accordionItems, contentForItem: { index in
+                    AccordionView(
+                        items: $accordionItems,
+                        contentForItem: { index in
                         switch index {
                         case 0:
                             return AnyView(
@@ -77,7 +81,8 @@ struct CustomizeView: View {
                                             selectedTab: selectedTab,
                                             range: 1...100,
                                             type: .stroke,
-                                            title: "Size"
+                                            title: "Size",
+                                            isInteracting: $isInteractingWithComponent
                                         )
                                         Spacer()
                                         
@@ -88,7 +93,8 @@ struct CustomizeView: View {
                                             selectedTab: selectedTab,
                                             range: 0...24,
                                             type: .blur,
-                                            title: "Blur"
+                                            title: "Blur",
+                                            isInteracting: $isInteractingWithComponent
                                         )
                                         Spacer()
                                         
@@ -99,7 +105,8 @@ struct CustomizeView: View {
                                             selectedTab: selectedTab,
                                             range: 1...32,
                                             type: .divisions,
-                                            title: "Steps"
+                                            title: "Steps",
+                                            isInteracting: $isInteractingWithComponent
                                         )
                                         Spacer()
                                         
@@ -110,7 +117,8 @@ struct CustomizeView: View {
                                             selectedTab: selectedTab,
                                             range: 1...CGFloat((360 / sharedData.divisions) - 1), // subtract 1 so the division doesn't completely disappear
                                             type: .gap,
-                                            title: "Gap"
+                                            title: "Gap",
+                                            isInteracting: $isInteractingWithComponent
                                         )
                                         Spacer()
                                         
@@ -121,7 +129,8 @@ struct CustomizeView: View {
                                             selectedTab: selectedTab,
                                             range: 0...360,
                                             type: .rotation,
-                                            title: "Rotate"
+                                            title: "Rotate",
+                                            isInteracting: $isInteractingWithComponent
                                         )
                                     }
                                     .padding(0)
@@ -132,7 +141,10 @@ struct CustomizeView: View {
                         default:
                             return AnyView(Text("Default Content for Index \(index)"))
                         }
-                    }, expandedItemIndex: $expandedItemIndex)
+                        }, 
+                        expandedItemIndex: $expandedItemIndex,
+                        isInteractingWithComponent: $isInteractingWithComponent
+                    )
                     .padding(0)
                     
                     .onAppear {
@@ -161,7 +173,6 @@ struct CustomizeView: View {
             .frame(maxWidth: .infinity, maxHeight: geometry.size.height) // Set the maxHeight to the height of the parent view
         }
         .padding(0)
-        .frame(height: 800)
         
     }
     private func openFirstAccordionItem() {

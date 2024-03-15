@@ -18,38 +18,42 @@ struct AccordionView: View {
     @Binding var items: [AccordionItem]
     let contentForItem: (Int) -> AnyView
     @Binding var expandedItemIndex: Int?
-
+    @Binding var isInteractingWithComponent: Bool
+    
     var body: some View {
-        VStack {
-            ForEach(items.indices, id: \.self) { index in
-                DisclosureGroup(
-                    isExpanded: Binding(
-                        get: { expandedItemIndex == index },
-                        set: { isExpanded in
-                            if isExpanded {
-                                expandedItemIndex = index
-                            } else {
-                                expandedItemIndex = nil
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                ForEach(items.indices, id: \.self) { index in
+                    DisclosureGroup(
+                        isExpanded: Binding(
+                            get: { expandedItemIndex == index },
+                            set: { isExpanded in
+                                if isExpanded {
+                                    expandedItemIndex = index
+                                } else {
+                                    expandedItemIndex = nil
+                                }
                             }
+                        )
+                    ) {
+                        if expandedItemIndex == index {
+                            contentForItem(index)
+                                .padding(0)
+                                .frame(maxWidth: .infinity)
                         }
-                    )
-                ) {
-                    if expandedItemIndex == index {
-                        contentForItem(index)
-                            .padding(0)
-                            .frame(maxWidth: .infinity)
+                    } label: {
+                        Text(items[index].title)
+                            .textCase(.uppercase)
+                            .foregroundColor(.white)
                     }
-                } label: {
-                    Text(items[index].title)
-                        .textCase(.uppercase)
-                        .foregroundColor(.white)
+                    .padding()
+                    .disclosureGroupStyle(CustomDisclosureGroupStyle(button: Text("OK")))
                 }
-                .padding()
-                .disclosureGroupStyle(CustomDisclosureGroupStyle(button: Text("OK")))
             }
+            .padding(0)
+            .frame(maxWidth: .infinity)
         }
-        .padding(0)
-        .frame(maxWidth: .infinity)
+        .scrollDisabled(isInteractingWithComponent)
     }
 }
 

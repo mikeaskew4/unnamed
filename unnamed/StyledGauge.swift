@@ -32,6 +32,8 @@ struct StyledGauge: View {
     var gHeight: CGFloat = 140
     var gWidth: CGFloat = 100
     
+    @Binding var isInteracting: Bool
+    
     var body: some View {
         if #available(iOS 16, *) {
             VStack(alignment: .center, spacing: 0) {
@@ -107,8 +109,8 @@ struct StyledGauge: View {
                         }
                         .padding(0)
                     .gesture(
-                        DragGesture()
-                            .onChanged { value in
+                        DragGesture(minimumDistance: 0)                            .onChanged { value in
+                                isInteracting = true
 //                                if value.location.y > -16 && value.location.y < gHeight {
 //                                    updateGaugeValue(with: value)
 //                                }
@@ -124,6 +126,7 @@ struct StyledGauge: View {
                                 }
                             }
                             .onEnded { _ in
+                                isInteracting = false
                                 topVisible = false
                                 bottomVisible = false
                             }
