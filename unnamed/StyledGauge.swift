@@ -39,7 +39,7 @@ struct StyledGauge: View {
                 Rectangle()
                     .fill(.clear)
                     .border(.clear, width: 2.0)
-                    .frame(width: gWidth, height: gHeight)
+                    .frame(height: gHeight)
                     .overlay(
                         VStack {
                             VStack {
@@ -47,6 +47,7 @@ struct StyledGauge: View {
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .padding(0)
                                     .font(.system(size: 12))
+                                    
                             }
                             .zIndex(1)
                             .frame(width: 28, height: 40)
@@ -103,9 +104,8 @@ struct StyledGauge: View {
                                 .frame(maxWidth: .infinity, maxHeight: 8, alignment: .center)
                                 .padding(0)
                                 .offset(y: -12)
-                            
-                            
                         }
+                        .padding(0)
                     .gesture(
                         DragGesture()
                             .onChanged { value in
@@ -129,9 +129,11 @@ struct StyledGauge: View {
                             }
                     )
                 )
+                
                 Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: 70, maxHeight: .infinity)
+
         }
         else {
             Slider(value: Binding(

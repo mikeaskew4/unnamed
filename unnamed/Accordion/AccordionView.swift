@@ -40,18 +40,12 @@ struct AccordionView: View {
                             .frame(maxWidth: .infinity)
                     }
                 } label: {
-//                    HStack {
-                        Text(items[index].title)
-                            .textCase(.uppercase)
-                            .foregroundColor(.white)
-
-//                        Spacer()
-//                        Image(systemName: expandedItemIndex == index ? "chevron.up" : "chevron.down") // Custom caret
-//                            .foregroundColor(.white)
-//                    }
+                    Text(items[index].title)
+                        .textCase(.uppercase)
+                        .foregroundColor(.white)
                 }
                 .padding()
-                .disclosureGroupStyle(CustomDisclosureGroupStyle(button: Text("ok")))
+                .disclosureGroupStyle(CustomDisclosureGroupStyle(button: Text("OK")))
             }
         }
         .padding(0)

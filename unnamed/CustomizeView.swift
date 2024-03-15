@@ -24,7 +24,7 @@ struct CustomizeView: View {
     @State private var expandedItemIndex: Int? = nil
     
     var gHeight: CGFloat = 100
-    var gWidth: CGFloat = 100
+    var gWidth: CGFloat = 72
     
     var body: some View {
         
@@ -46,10 +46,9 @@ struct CustomizeView: View {
                         switch index {
                         case 0:
                             return AnyView(
-                                // Color Picker
-                                Grid(alignment: .bottom, horizontalSpacing: 4, verticalSpacing: 1) {
+                                VStack {
                                     // Color
-                                    GridRow {
+                                    HStack {
                                         VStack {
                                             ColorPicker("", selection: $tempColor)
                                                 .labelsHidden() // Hide the default label
@@ -61,15 +60,16 @@ struct CustomizeView: View {
                                                 
                                                 .frame(width: gWidth, height: gHeight)
                                                 .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 2.25 : 1.375)
-                                            
+                                                .padding(0)
                                             Text("Color")
-                                            
-                                            Spacer()
                                         }
+                                        .padding(0)
+                                        Spacer()
                                     }
+                                    .padding(0)
                                     
                                     // Shape
-                                    GridRow {
+                                    HStack() {
                                         // Stroke
                                         StyledGauge(
                                             sharedData: sharedData,
@@ -79,8 +79,7 @@ struct CustomizeView: View {
                                             type: .stroke,
                                             title: "Size"
                                         )
-                                        
-                                        
+                                        Spacer()
                                         
                                         // Blur
                                         StyledGauge(
@@ -91,6 +90,7 @@ struct CustomizeView: View {
                                             type: .blur,
                                             title: "Blur"
                                         )
+                                        Spacer()
                                         
                                         // Divisions
                                         StyledGauge(
@@ -101,6 +101,7 @@ struct CustomizeView: View {
                                             type: .divisions,
                                             title: "Steps"
                                         )
+                                        Spacer()
                                         
                                         // Gap
                                         StyledGauge(
@@ -111,6 +112,7 @@ struct CustomizeView: View {
                                             type: .gap,
                                             title: "Gap"
                                         )
+                                        Spacer()
                                         
                                         // Rotation
                                         StyledGauge(
@@ -122,10 +124,10 @@ struct CustomizeView: View {
                                             title: "Rotate"
                                         )
                                     }
-                                    
+                                    .padding(0)
                                 }
                                 .padding(0)
-                                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                                .frame(maxWidth: .infinity)
                             )
                         default:
                             return AnyView(Text("Default Content for Index \(index)"))
@@ -159,6 +161,7 @@ struct CustomizeView: View {
             .frame(maxWidth: .infinity, maxHeight: geometry.size.height) // Set the maxHeight to the height of the parent view
         }
         .padding(0)
+        .frame(height: 800)
         
     }
     private func openFirstAccordionItem() {
