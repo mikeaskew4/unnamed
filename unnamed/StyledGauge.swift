@@ -68,17 +68,30 @@ struct StyledGauge: View {
                                 Circle()
                                     .fill(Color.black) // or any color you prefer
                                     .edgesIgnoringSafeArea(.all) // Optional, if you want the circle to extend to the screen edges
-  
+                                
                                 Gauge(value: gaugeValue, in: range) {
                                     Text("")
                                 } currentValueLabel: {
                                     Text(Int(gaugeValue.rounded()).description)
                                         .opacity(bottomVisible || topVisible ? 0 : 1.0)
+                                        .rotationEffect(.degrees(180))
                                 }
                                 .gaugeStyle(.accessoryCircularCapacity)
                                 .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 1.375 : 1.0)
+                                .rotationEffect(.degrees(180))
                                 .padding(4)
                                 .zIndex(1)
+                                .tint(
+                                    AngularGradient(
+                                        gradient: Gradient(colors: [.purple, .cyan, .white]),
+                                        center: .center,
+                                        startAngle: .degrees(0),  // Adjust start angle
+                                        endAngle: .degrees(180)   // Adjust end angle
+                                    )
+                                )
+//                                .overlay(
+//                                    Circle().stroke(Color.white, lineWidth: 4)
+//                                )
                             }
                             .zIndex(2)
                             .background(Color.black)

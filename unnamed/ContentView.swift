@@ -78,7 +78,7 @@ struct ContentView: View {
                                 .padding(.vertical, 0)
                             
                                 CustomizeView(tabsModel: tabsModel, selectedTab: selectedTabBinding, sharedData: sharedData)
-                                    .padding(20)
+                                    .padding(0)
                                     .background(.black)
                                 Button("Reset") {
                                     resetAll()
